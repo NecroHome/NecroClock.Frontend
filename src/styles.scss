@@ -1,1 +1,349 @@
-/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+@import "primeflex/primeflex.css";
+
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.btn-acao,
+.p-button.btn-acao {
+    width: 30px !important;
+    min-width: 30px !important;
+    height: 30px !important;
+    border-radius: 8px !important;
+    background: #1f1f1f !important;
+    border: 1px solid #333 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    transition: 0.2s ease !important;
+}
+
+.btn-acao:hover,
+.p-button.btn-acao:hover {
+    background: #2a2a2a !important;
+}
+
+.btn-acao .pi,
+.p-button.btn-acao .pi {
+    font-size: 1rem !important;
+}
+
+.btn-navegacao .pi,
+.btn-editar .pi,
+.p-button.btn-navegacao .pi,
+.p-button.btn-editar .pi {
+    color: #4aa3ff !important;
+}
+
+.btn-navegacao:hover,
+.btn-editar:hover,
+.p-button.btn-navegacao:hover,
+.p-button.btn-editar:hover {
+    border-color: #4aa3ff !important;
+}
+
+.btn-reset .pi,
+.p-button.btn-reset .pi {
+    color: orange !important;
+}
+
+.btn-reset:hover,
+.p-button.btn-reset:hover {
+    border-color: orange !important;
+}
+
+.btn-novo-gasto .pi,
+.btn-check .pi,
+.p-button.btn-novo-gasto .pi,
+.p-button.btn-check .pi {
+    color: #7bff7b !important;
+}
+
+.btn-novo-gasto:hover,
+.btn-check:hover,
+.p-button.btn-novo-gasto:hover,
+.p-button.btn-check:hover {
+    border-color: #7bff7b !important;
+}
+
+.btn-logout .pi,
+.btn-remover .pi,
+.btn-uncheck .pi,
+.p-button.btn-logout .pi,
+.p-button.btn-remover .pi,
+.p-button.btn-uncheck .pi {
+    color: tomato !important;
+}
+
+.btn-logout:hover,
+.btn-remover:hover,
+.btn-uncheck:hover,
+.p-button.btn-logout:hover,
+.p-button.btn-remover:hover,
+.p-button.btn-uncheck:hover {
+    border-color: tomato !important;
+}
+
+.card-group,
+.card-group-bottom {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    flex-shrink: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.card-group {
+    height: 36px;
+    border-radius: 10px;
+}
+
+.card-group-bottom {
+    border-radius: 12px;
+}
+
+.total-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 28px;
+    flex-shrink: 0;
+    padding: 4px 8px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.35);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+    transition: 0.2s ease;
+}
+
+.total-box:hover {
+    transform: scale(1.04);
+}
+
+.total-box .icon {
+    font-size: 1.25rem;
+    color: inherit !important;
+    opacity: 0.9;
+    transition: 0.25s ease;
+}
+
+.total-box:hover .icon {
+    transform: scale(1.18);
+}
+
+.total-box .info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+}
+
+.total-box .label {
+    font-size: 0.7rem;
+    opacity: 0.78;
+    font-weight: 400;
+}
+
+.total-box .value {
+    font-size: 0.88rem;
+    font-weight: 400;
+}
+
+.bold-value .value,
+.total-box.descontos .value,
+.total-box.liquido .value,
+.total-box.restante .value,
+.indicador-box .value {
+    font-weight: 700;
+}
+
+.bruto {
+    color: #b6ff8a;
+}
+
+.liquido,
+.positivo {
+    color: #7dff7d;
+}
+
+.gastos {
+    color: #ff7a63;
+}
+
+.inss,
+.taxa,
+.pspd,
+.descontos,
+.fies,
+.meta {
+    color: #ffe066;
+}
+
+.hora {
+    color: #00e6e6;
+}
+
+.moto,
+.lime {
+    color: lime;
+}
+
+.patrimonio {
+    color: #00e6ff;
+}
+
+.tomato,
+.negativo,
+.red {
+    color: #ff4d4d;
+}
+
+.green {
+    color: #00ff00;
+}
+
+.card-jornada {
+    border-left: 3px solid #00e6e6;
+}
+
+.card-descontos,
+.card-fies,
+.card-meta {
+    border-left: 3px solid #ffe066;
+}
+
+.card-financeiro,
+.card-lime,
+.card-moto {
+    border-left: 3px solid #00ff00;
+}
+
+.card-patrimonio {
+    border-left: 3px solid #00e6ff;
+}
+
+.card-tomato {
+    border-left: 3px solid tomato;
+}
+
+.texto-diferenca-barra {
+    font-size: 0.75rem;
+    font-weight: bold !important;
+    background-color: black;
+    border-radius: 5px;
+    border: solid 1px black;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 5px;
+    min-width: 100px;
+    vertical-align: middle;
+    height: 25px;
+}
+
+.app-title {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+
+    font-size: clamp(0.75rem, 1.5vw, 1.5rem);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-align: center;
+
+    background: linear-gradient(135deg,
+            #60a5fa 0%,
+            #3b82f6 25%,
+            #6366f1 50%,
+            #8b5cf6 75%,
+            #a855f7 100%);
+
+    background-size: 250% 250%;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: gradientFlow 8s ease infinite;
+
+    text-shadow:
+        0 0 6px rgba(59, 130, 246, 0.25),
+        0 0 12px rgba(139, 92, 246, 0.18);
+
+    user-select: none;
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: -8px -16px;
+
+        background:
+            radial-gradient(circle at left,
+                rgba(59, 130, 246, 0.18),
+                transparent 55%),
+            radial-gradient(circle at right,
+                rgba(168, 85, 247, 0.18),
+                transparent 55%);
+
+        filter: blur(20px);
+        z-index: -1;
+        border-radius: 999px;
+    }
+
+    &::after {
+        content: '';
+
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+
+        width: 70%;
+        height: 2px;
+
+        transform: translateX(-50%);
+
+        border-radius: 999px;
+
+        background: linear-gradient(90deg,
+                transparent,
+                #3b82f6,
+                #8b5cf6,
+                transparent);
+
+        box-shadow:
+            0 0 8px rgba(59, 130, 246, 0.45),
+            0 0 14px rgba(139, 92, 246, 0.35);
+    }
+}
+
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
