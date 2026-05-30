@@ -39,7 +39,7 @@ export class AppMiddleComponent implements OnChanges {
         }
     }
 
-    gerarSemanas(): any[] {
+    gerarSemanas(): void {
         const dataInicioMes: Date = this.mes[0];
         const dataFimMes: Date = this.mes[1];
 
@@ -80,10 +80,10 @@ export class AppMiddleComponent implements OnChanges {
             inicioSemana.setDate(inicioSemana.getDate() + 3);
         }
 
-        return semanas;
+        this.semanas = semanas;
     }
 
-    gerarConsolidado(): any[] {
+    gerarConsolidado(): void {
 
         const mapa = new Map<string, any>();
 
@@ -101,7 +101,7 @@ export class AppMiddleComponent implements OnChanges {
             mapa.get(demanda.numeroDemanda).horas += demanda.horas;
         }
 
-        return [...mapa.values()]
+        this.consolidado = [...mapa.values()]
             .sort((a, b) =>
                 a.numeroDemanda.localeCompare(b.numeroDemanda));
     }
