@@ -1,0 +1,92 @@
+<div class="dashboard">
+
+    <div class="middle">
+
+        <div class="card card-large">
+
+            <div class="labels-card-superior">
+                Horas Trabalhadas
+            </div>
+
+            <div class="card-content v-between-2">
+
+                @for(semana of semanas; track semana.numeroSemana) {
+
+                    <div class="semana-container">
+
+                        <div class="semana-header">
+                            Semana {{ semana.numeroSemana }}:
+                            {{ semana.inicio | date:'dd/MM/yyyy' }}
+                            -
+                            {{ semana.fim | date:'dd/MM/yyyy' }}
+                        </div>
+
+                        @if(semana.demandas.length === 0) {
+
+                            <div class="barra-container-bottom">
+                                <div class="col texto-data-barra">
+                                    Nenhuma hora registrada nesta semana
+                                </div>
+                            </div>
+
+                        }
+
+                        @for(item of semana.demandas; track $index) {
+
+                            <div class="barra-container-bottom">
+
+                                <div class="col-3 texto-descricao-barra">
+                                    {{ item.numeroDemanda }}
+                                </div>
+
+                                <div class="col">
+                                    {{ item.descricao }}
+                                </div>
+
+                                <div class="col texto-valor-barra value-economias">
+                                    {{ item.horas }}h
+                                </div>
+
+                            </div>
+
+                        }
+
+                    </div>
+
+                }
+
+                <div class="consolidado-container">
+
+                    <div class="semana-header consolidado-header">
+                        Horas Consolidadas
+                    </div>
+
+                    @for(item of consolidado; track item.numeroDemanda) {
+
+                        <div class="barra-container-bottom">
+
+                            <div class="col-3 texto-descricao-barra">
+                                {{ item.numeroDemanda }}
+                            </div>
+
+                            <div class="col">
+                                {{ item.descricao }}
+                            </div>
+
+                            <div class="col texto-valor-barra value-economias">
+                                {{ item.horas }}h
+                            </div>
+
+                        </div>
+
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -4,6 +4,7 @@ import { MessageService } from "primeng/api";
 import { concatMap, defer, forkJoin } from "rxjs";
 import { ToastModule } from "primeng/toast";
 import { AppTopBarComponent } from "../app.top.bar/app.top.bar.component";
+import { AppMiddleComponent } from "../app.middle.view/app.middle.component";
 
 @Component({
     selector: 'app-main-view-component',
@@ -11,7 +12,8 @@ import { AppTopBarComponent } from "../app.top.bar/app.top.bar.component";
     styleUrls: ['./app.main.view.component.scss'],
     imports: [
     ToastModule,
-    AppTopBarComponent
+    AppTopBarComponent,
+    AppMiddleComponent
 ],
     providers: [
         MessageService
@@ -21,6 +23,7 @@ export class AppMainViewComponent {
     isMobile = window.matchMedia("(max-width: 768px)").matches;
 
     range: Date[] = [];
+    demandas: any[] = [];
 
     constructor(
         private messageService: MessageService,
