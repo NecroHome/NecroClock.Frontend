@@ -1,6 +1,6 @@
 @if(isMobile == false) {
 <div class="app-title">NecroClock</div>
-<app-top-bar-component ></app-top-bar-component>
+<app-top-bar-component (onLogout)="onLogOut()"></app-top-bar-component>
 <p-toast position="top-right"></p-toast>
 } @else {
 
