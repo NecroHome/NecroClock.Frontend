@@ -1,0 +1,62 @@
+# Compiled output
+/dist
+/tmp
+/out-tsc
+
+# Dependencies
+/node_modules
+
+# Angular cache
+/.angular/cache
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+!.vscode/settings.json
+
+# Visual Studio
+/.vs
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Coverage
+/coverage
+
+# Build artifacts
+*.tsbuildinfo
+
+# Environment files (opcional)
+# src/environments/environment.ts
+# src/environments/environment.prod.ts
+
+# Firebase
+.firebase/
+.firebaserc
+
+# Temporary files
+*.tmp
+*.temp
