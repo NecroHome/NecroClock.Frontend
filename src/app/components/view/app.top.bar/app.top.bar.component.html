@@ -1,0 +1,29 @@
+<p-toolbar class="p-2">
+    <div class="toolbar-content">
+        <div class="toolbar-left">
+            <p-button styleClass="btn-acao btn-reset" severity="warn" icon="pi pi-refresh" iconPos="left"
+                title="Ir para o Mês atual" (onClick)="setRangeDates()"></p-button>
+        </div>
+
+        <div class="toolbar-left-middle">
+            
+        </div>
+
+        <div class="toolbar-middle">
+            <p-button styleClass="btn-acao btn-navegacao" icon="pi pi-arrow-left" severity="info"
+                (onClick)="prevMonth()" title="Mês Anterior"></p-button>
+            <div class="label-mes-atual">{{ mesAtual }}</div>
+            <p-button styleClass="btn-acao btn-navegacao" icon="pi pi-arrow-right" severity="info"
+                (onClick)="nextMonth()" title="Mês Posterior"></p-button>
+        </div>
+
+        <div class="toolbar-middle-right">
+            
+        </div>
+
+        <div class="toolbar-right">
+            <p-button styleClass="btn-acao btn-logout" severity="danger" icon="pi pi-sign-out" iconPos="left"
+                title="Logout" (onClick)="logout()"></p-button>
+        </div>
+    </div>
+</p-toolbar>
