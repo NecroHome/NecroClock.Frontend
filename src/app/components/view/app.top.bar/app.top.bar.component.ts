@@ -14,11 +14,11 @@ import { Toast, ToastModule } from "primeng/toast";
     templateUrl: './app.top.bar.component.html',
     styleUrls: ['./app.top.bar.component.scss'],
     imports: [
-    FormsModule, CommonModule,
-    ButtonModule, DatePickerModule, ToolbarModule,
-    DialogCadastrarDemanda,
-    ToastModule
-],
+        FormsModule, CommonModule,
+        ButtonModule, DatePickerModule, ToolbarModule,
+        DialogCadastrarDemanda,
+        ToastModule
+    ],
     providers: [
         MessageService
     ]
@@ -129,6 +129,7 @@ export class AppTopBarComponent implements OnInit, OnChanges {
     }
 
     gerarHorasConsolidadas(): void {
+
         const demandasAgrupadas = new Map<string, number>();
 
         this.demandas.forEach(d => {
@@ -140,8 +141,34 @@ export class AppTopBarComponent implements OnInit, OnChanges {
             .map(([numeroDemanda, horas]) => `${numeroDemanda} - ${horas}h`)
             .join('\n');
 
-        navigator.clipboard.writeText(consolidado);
-        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Horas consolidadas copiadas para a area de transferencia.' });
+        if (navigator.clipboard) {
+
+            navigator.clipboard.writeText(consolidado).then(() => {
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Sucesso',
+                    detail: 'Horas consolidadas copiadas.'
+                });
+            });
+
+        } else {
+
+            const textarea = document.createElement('textarea');
+            textarea.value = consolidado;
+
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            document.execCommand('copy');
+
+            document.body.removeChild(textarea);
+
+            this.messageService.add({
+                severity: 'success',
+                summary: 'Sucesso',
+                detail: 'Horas consolidadas copiadas.'
+            });
+        }
     }
 
     logout(): void {
