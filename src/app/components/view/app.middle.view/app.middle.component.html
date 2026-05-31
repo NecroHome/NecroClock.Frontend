@@ -12,46 +12,57 @@
 
                 @for(semana of semanas; track semana.numeroSemana) {
 
-                    <div class="semana-container">
+                <div class="semana-container">
 
-                        <div class="semana-header">
-                            Semana {{ semana.numeroSemana }}:
-                            {{ semana.inicio | date:'dd/MM/yyyy' }}
-                            -
-                            {{ semana.fim | date:'dd/MM/yyyy' }}
+                    <div class="semana-header">
+                        Semana {{ semana.numeroSemana }}:
+                        {{ semana.inicio | date:'dd/MM/yyyy' }}
+                        -
+                        {{ semana.fim | date:'dd/MM/yyyy' }}
+                    </div>
+
+                    @if(semana.demandas.length === 0) {
+
+                    <div class="barra-container-bottom">
+                        <div class="col texto-data-barra">
+                            Nenhuma hora registrada nesta semana
+                        </div>
+                    </div>
+
+                    }
+
+                    @for(item of semana.demandas; track $index) {
+
+                    <div class="barra-container-bottom">
+
+                        <div class="col-3 texto-descricao-barra">
+                            {{ item.numeroDemanda }}
                         </div>
 
-                        @if(semana.demandas.length === 0) {
+                        <div class="col">
+                            {{ item.descricao }}
+                        </div>
 
-                            <div class="barra-container-bottom">
-                                <div class="col texto-data-barra">
-                                    Nenhuma hora registrada nesta semana
-                                </div>
-                            </div>
+                        <div class="col texto-valor-barra value-economias">
+                            {{ item.horas }}h
+                        </div>
 
-                        }
+                        <div class="col-acoes">
+                            <p-button styleClass="btn-acao btn-novo-gasto" icon="pi pi-plus" severity="success"
+                                (onClick)="adicionarHoras(item)" title="Adicionar 1h a está demanda."></p-button>
 
-                        @for(item of semana.demandas; track $index) {
+                            <p-button styleClass="btn-acao btn-logout" icon="pi pi-minus" severity="danger"
+                                (onClick)="removerHoras(item)" title="Remover 1h a está demanda."></p-button>
 
-                            <div class="barra-container-bottom">
-
-                                <div class="col-3 texto-descricao-barra">
-                                    {{ item.numeroDemanda }}
-                                </div>
-
-                                <div class="col">
-                                    {{ item.descricao }}
-                                </div>
-
-                                <div class="col texto-valor-barra value-economias">
-                                    {{ item.horas }}h
-                                </div>
-
-                            </div>
-
-                        }
+                            <p-button styleClass="btn-acao btn-logout" icon="pi pi-trash" severity="danger"
+                                (onClick)="deletarDemanda(item)" title="Deletar demanda"></p-button>
+                        </div>
 
                     </div>
+
+                    }
+
+                </div>
 
                 }
 
@@ -63,21 +74,21 @@
 
                     @for(item of consolidado; track item.numeroDemanda) {
 
-                        <div class="barra-container-bottom">
+                    <div class="barra-container-bottom">
 
-                            <div class="col-3 texto-descricao-barra">
-                                {{ item.numeroDemanda }}
-                            </div>
-
-                            <div class="col">
-                                {{ item.descricao }}
-                            </div>
-
-                            <div class="col texto-valor-barra value-economias">
-                                {{ item.horas }}h
-                            </div>
-
+                        <div class="col-3 texto-descricao-barra">
+                            {{ item.numeroDemanda }}
                         </div>
+
+                        <div class="col">
+                            {{ item.descricao }}
+                        </div>
+
+                        <div class="col texto-valor-barra value-economias">
+                            {{ item.horas }}h
+                        </div>
+
+                    </div>
 
                     }
 

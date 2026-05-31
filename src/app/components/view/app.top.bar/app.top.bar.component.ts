@@ -4,20 +4,26 @@ import { ButtonModule } from "primeng/button";
 import { DatePickerModule } from "primeng/datepicker";
 import { ToolbarModule } from "primeng/toolbar";
 import { CommonModule } from "@angular/common";
+import { DialogCadastrarDemanda } from "../../ui/dialog/dialog.cadastrar.demanda";
+import { DemandaModel } from "../../../models/demanda.model";
 
 @Component({
     selector: 'app-top-bar-component',
     templateUrl: './app.top.bar.component.html',
     styleUrls: ['./app.top.bar.component.scss'],
     imports: [
-        FormsModule, CommonModule,
-        ButtonModule, DatePickerModule, ToolbarModule
-    ]
+    FormsModule, CommonModule,
+    ButtonModule, DatePickerModule, ToolbarModule,
+    DialogCadastrarDemanda
+]
 })
 export class AppTopBarComponent implements OnInit, OnChanges {
 
     @Output('onNovaData') onNovaData: EventEmitter<Date[]> = new EventEmitter<Date[]>();
     @Output('onLogout') onLogout: EventEmitter<void> = new EventEmitter<void>();
+    @Output('onCadastrarDemanda') onCadastrarDemanda: EventEmitter<DemandaModel> = new EventEmitter<DemandaModel>();
+
+    @ViewChild('dialogCadastrarDemanda') dialogCadastrarDemanda: DialogCadastrarDemanda;
 
     rangeDates: Date[] = [];
 
@@ -77,10 +83,6 @@ export class AppTopBarComponent implements OnInit, OnChanges {
         this.setRangeDates();
     }
 
-    atualizarDados(): void {
-
-    }
-
     isSameDay(d1: Date, d2: Date): boolean {
         return d1.getFullYear() === d2.getFullYear() &&
             d1.getMonth() === d2.getMonth() &&
@@ -104,6 +106,13 @@ export class AppTopBarComponent implements OnInit, OnChanges {
         this.mesAtual = meses[mesIndex];
     }
 
+    novaDemanda(): void {
+        this.dialogCadastrarDemanda.abrirParaCadastrar();
+    }
+
+    cadastrarDemanda(demanda: DemandaModel): void {
+        this.onCadastrarDemanda.emit(demanda);
+    }
 
     logout(): void {
         this.onLogout.emit();

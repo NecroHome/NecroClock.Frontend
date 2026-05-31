@@ -3,5 +3,6 @@ const api = `http://localhost:8080/api`;
 export const environment = {
     production: false,
 
-    loginContext: `${api}/auth/`
+    loginContext: `${api}/auth/`,
+    demandaContext: `${api}/demandas/`
 };

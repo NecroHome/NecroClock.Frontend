@@ -1,0 +1,92 @@
+<p-dialog [(visible)]="display" [modal]="true" [style]="{ width: '500px' }" [closable]="false">
+
+    <div class="demanda-dialog">
+
+        <div class="dialog-header">
+            <i class="pi pi-briefcase"></i>
+            <h2>
+                {{ modoEditar ? 'Editar Demanda' : 'Nova Demanda' }}
+            </h2>
+        </div>
+
+        <form [formGroup]="formDemanda" class="demanda-form">
+            <div class="field-card">
+                <i class="pi pi-hashtag"></i>
+
+                <div class="field-info">
+                    <label for="numeroDemanda">
+                        Número da Demanda
+                    </label>
+
+                    <input id="numeroDemanda" pInputText formControlName="numeroDemanda" class="texto-input"
+                        placeholder="Ex: T4DMND00001" style="text-transform: uppercase;">
+                </div>
+            </div>
+
+            <div class="field-card">
+                <i class="pi pi-calendar"></i>
+
+                <div class="field-info">
+                    <label for="data">
+                        Data
+                    </label>
+
+                    <p-datepicker id="data" formControlName="data" dateFormat="dd/mm/yy" [showIcon]="true"
+                        [showButtonBar]="true" appendTo="body">
+                    </p-datepicker>
+
+                    <small class="field-help">
+                        Data da demanda
+                    </small>
+                </div>
+            </div>
+
+            <div class="field-card">
+                <i class="pi pi-file-edit"></i>
+
+                <div class="field-info">
+                    <label for="descricao">
+                        Descrição
+                    </label>
+
+                    <textarea id="descricao" pInputTextarea formControlName="descricao" rows="4" class="texto-area"
+                        placeholder="Descrição opcional da demanda">
+                    </textarea>
+                </div>
+            </div>
+
+            <div class="field-card">
+                <i class="pi pi-clock"></i>
+
+                <div class="field-info">
+                    <label for="horas">
+                        Horas
+                    </label>
+
+                    <p-inputNumber id="horas" formControlName="horas" [min]="0" [minFractionDigits]="0"
+                        [maxFractionDigits]="1" [showButtons]="true" buttonLayout="horizontal"
+                        incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
+                    </p-inputNumber>
+
+                    <small class="field-help">
+                        Valor inicial opcional (padrão 0h)
+                    </small>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+    <ng-template pTemplate="footer">
+
+        <p-button label="Cancelar" severity="danger" (onClick)="cancelar()">
+        </p-button>
+
+        <p-button [label]="modoEditar ? 'Atualizar' : 'Cadastrar'" severity="success" [disabled]="formDemanda.invalid"
+            (onClick)="salvar()">
+        </p-button>
+
+    </ng-template>
+
+</p-dialog>

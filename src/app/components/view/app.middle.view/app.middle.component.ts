@@ -5,6 +5,7 @@ import { TableModule } from "primeng/table";
 import { ButtonModule } from "primeng/button";
 import { ConfirmationService } from "primeng/api";
 import { CardModule } from "primeng/card";
+import { DemandaModel } from "../../../models/demanda.model";
 
 @Component({
     selector: 'app-middle-component',
@@ -26,6 +27,10 @@ export class AppMiddleComponent implements OnChanges {
     @Input('demandas') demandas: any[] = [];
     @Input('mes') mes: Date[];
 
+    @Output('onAdicionarHora') onAdicionarHora: EventEmitter<DemandaModel> = new EventEmitter<DemandaModel>();
+    @Output('onRemoverHora') onRemoverHora: EventEmitter<DemandaModel> = new EventEmitter<DemandaModel>();
+    @Output('onDeletarDemanda') onDeletarDemanda: EventEmitter<DemandaModel> = new EventEmitter<DemandaModel>();
+
     constructor(
         private confirmationService: ConfirmationService
     ) {
@@ -33,15 +38,19 @@ export class AppMiddleComponent implements OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes["mes"]) {
+        if (changes["demandas"]) {
             this.gerarSemanas();
             this.gerarConsolidado();
         }
     }
 
     gerarSemanas(): void {
-        const dataInicioMes: Date = this.mes[0];
-        const dataFimMes: Date = this.mes[1];
+
+        const dataInicioMes = new Date(this.mes[0]);
+        const dataFimMes = new Date(this.mes[1]);
+
+        dataInicioMes.setHours(0, 0, 0, 0);
+        dataFimMes.setHours(0, 0, 0, 0);
 
         const semanas: any[] = [];
 
@@ -50,7 +59,7 @@ export class AppMiddleComponent implements OnChanges {
 
         while (inicioSemana <= dataFimMes) {
 
-            let fimSemana = new Date(inicioSemana);
+            const fimSemana = new Date(inicioSemana);
 
             while (
                 fimSemana.getDay() !== 5 &&
@@ -61,7 +70,7 @@ export class AppMiddleComponent implements OnChanges {
 
             const demandasSemana = this.demandas.filter(d => {
 
-                const data = new Date(d.data);
+                const data = this.parseDateOnly(d.data);
 
                 return data >= inicioSemana &&
                     data <= fimSemana;
@@ -82,27 +91,48 @@ export class AppMiddleComponent implements OnChanges {
 
         this.semanas = semanas;
     }
-
     gerarConsolidado(): void {
 
         const mapa = new Map<string, any>();
 
         for (const demanda of this.demandas) {
 
-            if (!mapa.has(demanda.numeroDemanda)) {
+            let item = mapa.get(demanda.numeroDemanda);
 
-                mapa.set(demanda.numeroDemanda, {
+            if (!item) {
+
+                item = {
                     numeroDemanda: demanda.numeroDemanda,
                     descricao: demanda.descricao,
                     horas: 0
-                });
+                };
+
+                mapa.set(demanda.numeroDemanda, item);
             }
 
-            mapa.get(demanda.numeroDemanda).horas += demanda.horas;
+            item.horas += demanda.horas;
         }
 
-        this.consolidado = [...mapa.values()]
+        this.consolidado = Array
+            .from(mapa.values())
             .sort((a, b) =>
                 a.numeroDemanda.localeCompare(b.numeroDemanda));
+    }
+
+    private parseDateOnly(value: string): Date {
+        const [ano, mes, dia] = value.split('-').map(Number);
+        return new Date(ano, mes - 1, dia);
+    }
+
+    adicionarHoras(item: DemandaModel): void {
+        this.onAdicionarHora.emit(item);
+    }
+
+    removerHoras(item: DemandaModel): void {
+        this.onRemoverHora.emit(item);
+    }
+
+    deletarDemanda(item: DemandaModel): void {
+        this.onDeletarDemanda.emit(item);
     }
 }
