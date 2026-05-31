@@ -1,6 +1,6 @@
 @if(isMobile == false) {
 <div class="app-title">NecroClock</div>
-<app-top-bar-component (onLogout)="onLogOut()" (onNovaData)="onNovaData($event)"
+<app-top-bar-component [demandas]="demandas" (onLogout)="onLogOut()" (onNovaData)="onNovaData($event)"
     (onCadastrarDemanda)="cadastrarDemanda($event)"></app-top-bar-component>
 <app-middle-component [mes]="range" [demandas]="demandas"
     (onAdicionarHora)="adicionarHora($event)"

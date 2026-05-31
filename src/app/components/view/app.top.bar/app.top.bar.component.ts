@@ -6,6 +6,8 @@ import { ToolbarModule } from "primeng/toolbar";
 import { CommonModule } from "@angular/common";
 import { DialogCadastrarDemanda } from "../../ui/dialog/dialog.cadastrar.demanda";
 import { DemandaModel } from "../../../models/demanda.model";
+import { MessageService } from "primeng/api";
+import { Toast, ToastModule } from "primeng/toast";
 
 @Component({
     selector: 'app-top-bar-component',
@@ -14,10 +16,16 @@ import { DemandaModel } from "../../../models/demanda.model";
     imports: [
     FormsModule, CommonModule,
     ButtonModule, DatePickerModule, ToolbarModule,
-    DialogCadastrarDemanda
-]
+    DialogCadastrarDemanda,
+    ToastModule
+],
+    providers: [
+        MessageService
+    ]
 })
 export class AppTopBarComponent implements OnInit, OnChanges {
+
+    @Input('demandas') demandas: DemandaModel[];
 
     @Output('onNovaData') onNovaData: EventEmitter<Date[]> = new EventEmitter<Date[]>();
     @Output('onLogout') onLogout: EventEmitter<void> = new EventEmitter<void>();
@@ -30,6 +38,12 @@ export class AppTopBarComponent implements OnInit, OnChanges {
     mesAtual: string = '';
     mesAnterior: string = '';
     proximoMes: string = '';
+
+    constructor(
+        private messageService: MessageService
+    ) {
+
+    }
 
     ngOnChanges(changes: SimpleChanges): void {
 
@@ -112,6 +126,22 @@ export class AppTopBarComponent implements OnInit, OnChanges {
 
     cadastrarDemanda(demanda: DemandaModel): void {
         this.onCadastrarDemanda.emit(demanda);
+    }
+
+    gerarHorasConsolidadas(): void {
+        const demandasAgrupadas = new Map<string, number>();
+
+        this.demandas.forEach(d => {
+            const horasAtuais = demandasAgrupadas.get(d.numeroDemanda) ?? 0;
+            demandasAgrupadas.set(d.numeroDemanda, horasAtuais + d.horas);
+        });
+
+        const consolidado = Array.from(demandasAgrupadas.entries())
+            .map(([numeroDemanda, horas]) => `${numeroDemanda} - ${horas}h`)
+            .join('\n');
+
+        navigator.clipboard.writeText(consolidado);
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Horas consolidadas copiadas para a area de transferencia.' });
     }
 
     logout(): void {

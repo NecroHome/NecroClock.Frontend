@@ -3,6 +3,8 @@
         <div class="toolbar-left">
             <p-button styleClass="btn-acao btn-reset" severity="warn" icon="pi pi-refresh" iconPos="left"
                 title="Ir para o Mês atual" (onClick)="setRangeDates()"></p-button>
+            <p-button styleClass="btn-acao btn-navegacao" severity="info" icon="pi pi-download" iconPos="left"
+                title="Gerar horas consilidadas e copiar para a area de transferencia" (onClick)="gerarHorasConsolidadas()"></p-button>
             <p-button styleClass="btn-acao btn-novo-gasto" icon="pi pi-plus" severity="success"
                 (onClick)="novaDemanda()" title="Cadastrar nova demanda."></p-button>
         </div>
@@ -31,3 +33,4 @@
 </p-toolbar>
 
 <dialog-cadastrar-demanda #dialogCadastrarDemanda (onCadastrarDemanda)="cadastrarDemanda($event)"></dialog-cadastrar-demanda>
+<p-toast position="top-right"></p-toast>
