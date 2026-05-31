@@ -62,7 +62,7 @@ export class AppMiddleComponent implements OnChanges {
             const fimSemana = new Date(inicioSemana);
 
             while (
-                fimSemana.getDay() !== 5 &&
+                fimSemana.getDay() !== 6 && // Sábado
                 fimSemana < dataFimMes
             ) {
                 fimSemana.setDate(fimSemana.getDate() + 1);
@@ -86,11 +86,12 @@ export class AppMiddleComponent implements OnChanges {
             numeroSemana++;
 
             inicioSemana = new Date(fimSemana);
-            inicioSemana.setDate(inicioSemana.getDate() + 3);
+            inicioSemana.setDate(inicioSemana.getDate() + 1);
         }
 
         this.semanas = semanas;
     }
+
     gerarConsolidado(): void {
 
         const mapa = new Map<string, any>();
