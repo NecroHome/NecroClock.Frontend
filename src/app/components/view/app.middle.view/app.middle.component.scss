@@ -765,3 +765,9 @@
     border-color: var(--primary-color);
     box-shadow: 0 0 8px rgba(var(--primary-color-rgb), 0.2);
 }
+
+.col-acoes {
+    margin-left: auto;
+    display: flex;
+    justify-content: flex-end;
+}

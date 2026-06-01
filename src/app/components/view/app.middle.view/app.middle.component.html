@@ -43,11 +43,11 @@
                             {{ item.descricao }}
                         </div>
 
-                        <div class="col texto-valor-barra value-economias">
+                        <div class="col-2 texto-valor-barra value-economias">
                             {{ item.horas }}h
                         </div>
 
-                        <div class="col-acoes">
+                        <div class="col-1 col-acoes">
                             <p-button styleClass="btn-acao btn-novo-gasto" icon="pi pi-plus" severity="success"
                                 (onClick)="adicionarHoras(item)" title="Adicionar 1h a está demanda."></p-button>
 
@@ -90,8 +90,12 @@
                             {{ item.descricao }}
                         </div>
 
-                        <div class="col texto-valor-barra value-economias">
+                        <div class="col-2 texto-valor-barra value-economias">
                             {{ item.horas }}h
+                        </div>
+
+                        <div class="col-1 col-acoes">
+
                         </div>
 
                     </div>
