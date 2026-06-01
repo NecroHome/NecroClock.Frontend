@@ -1,59 +1,86 @@
-# NecroClockFrontend
+# NecroClock
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.3.
+A simple application for tracking worked hours.
 
-## Development server
+## Description
 
-To start a local development server, run:
+NecroClock was created to simplify the process of registering and consolidating worked hours across multiple demands. The application focuses on speed, simplicity, and practicality for daily use.
+
+## Features
+
+### Demand Management
+
+* Create new demands
+* Edit existing demands
+* Delete demands
+* Optional demand description
+
+### Time Tracking
+
+* Quickly add 1 hour to a demand
+* Quickly remove 1 hour from a demand
+* Manually adjust worked hours
+* Automatic consolidation of hours
+
+### Weekly Organization
+
+* Demands are grouped by week
+* Weeks are organized from Saturday to Sunday
+* Easy visualization of worked hours per period
+
+### Utilities
+
+Copy demand information in the following format:
+
+```text
+{DemandNumber} - {Description}
+```
+
+Copy consolidated hours in the following format:
+
+```text
+{DemandNumber} - {Hours}
+{DemandNumber} - {Hours}
+```
+
+## Technologies
+
+* Angular
+* PrimeNG
+* ASP.NET Core
+* Docker
+* MariaDB / MySQL
+
+## Installation
 
 ```bash
+git clone https://github.com/NecroHome/NecroClock.Frontend.git
+cd NecroClock.Frontend
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The application will be available at:
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```text
+http://localhost:4200
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+or using Docker
 
 ```bash
-ng generate --help
+git clone https://github.com/NecroHome/NecroClock.Frontend.git
+cd NecroClock.Frontend
+docker compose up -d --build
 ```
 
-## Building
+The application will be available at:
 
-To build the project run:
-
-```bash
-ng build
+```text
+http://{IP from here docker is runing}:6005
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Changelog
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### v1.0.0
+* Initial release
