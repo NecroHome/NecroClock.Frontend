@@ -96,7 +96,7 @@ export class AppMainViewComponent {
             accept: () => {
                 this.demandaService.deleteDemanda(demanda).subscribe({
                     next: () => {
-                        this.messageService.add({ severity: 'success', summary: 'Sucess!', detail: 'Demanda removida com sucesso!' });
+                        this.messageService.add({ severity: 'success', summary: 'Success!', detail: 'Demanda removida com sucesso!' });
                         this.buscarDados();
                     }
                 });
@@ -105,6 +105,15 @@ export class AppMainViewComponent {
             rejectLabel: 'Cancelar',
             reject: () => {
 
+            }
+        });
+    }
+
+    editarDemanda(demanda: DemandaModel): void {
+        this.demandaService.updateDemanda(demanda).subscribe({
+            next: () => {
+                this.messageService.add({ severity: 'success', summary: 'Success!', detail: 'Demanda atualizada com sucesso!' });
+                this.buscarDados();
             }
         });
     }

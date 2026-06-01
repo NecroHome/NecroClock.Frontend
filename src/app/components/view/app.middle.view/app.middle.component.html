@@ -54,6 +54,12 @@
                             <p-button styleClass="btn-acao btn-logout" icon="pi pi-minus" severity="danger"
                                 (onClick)="removerHoras(item)" title="Remover 1h a está demanda."></p-button>
 
+                            <p-button styleClass="btn-acao btn-navegacao" severity="info" icon="pi pi-clone" iconPos="left"
+                                title="Copiar número da demanda e descricao" (onClick)="copiarNumeroDemandaEDescricao(item)"></p-button>
+
+                            <p-button styleClass="btn-acao btn-reset" severity="warn" icon="pi pi-pencil" iconPos="left"
+                                title="Editar dados da demanda" (onClick)="editarDemanda(item)"></p-button>
+
                             <p-button styleClass="btn-acao btn-logout" icon="pi pi-trash" severity="danger"
                                 (onClick)="deletarDemanda(item)" title="Deletar demanda"></p-button>
                         </div>
@@ -101,3 +107,6 @@
     </div>
 
 </div>
+
+<dialog-cadastrar-demanda #dialogCadastrarDemanda (onCadastrarDemanda)="cadastrarDemanda($event)"></dialog-cadastrar-demanda>
+<p-toast position="top-right"></p-toast>

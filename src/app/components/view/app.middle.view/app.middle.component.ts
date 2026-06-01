@@ -3,9 +3,12 @@ import { FormsModule } from "@angular/forms";
 import { CommonModule, CurrencyPipe, DatePipe } from "@angular/common";
 import { TableModule } from "primeng/table";
 import { ButtonModule } from "primeng/button";
-import { ConfirmationService } from "primeng/api";
+import { ConfirmationService, MessageService } from "primeng/api";
 import { CardModule } from "primeng/card";
 import { DemandaModel } from "../../../models/demanda.model";
+import { MessageModule } from "primeng/message";
+import { ToastModule } from "primeng/toast";
+import { DialogCadastrarDemanda } from "../../ui/dialog/dialog.cadastrar.demanda";
 
 @Component({
     selector: 'app-middle-component',
@@ -13,10 +16,11 @@ import { DemandaModel } from "../../../models/demanda.model";
     styleUrls: ['./app.middle.component.scss'],
     imports: [
         CommonModule, FormsModule,
-        CardModule, TableModule, ButtonModule
+        CardModule, TableModule, ButtonModule,
+        ToastModule, DialogCadastrarDemanda
     ],
     providers: [
-        ConfirmationService
+        ConfirmationService, MessageService
     ]
 })
 export class AppMiddleComponent implements OnChanges {
@@ -30,9 +34,13 @@ export class AppMiddleComponent implements OnChanges {
     @Output('onAdicionarHora') onAdicionarHora: EventEmitter<DemandaModel> = new EventEmitter<DemandaModel>();
     @Output('onRemoverHora') onRemoverHora: EventEmitter<DemandaModel> = new EventEmitter<DemandaModel>();
     @Output('onDeletarDemanda') onDeletarDemanda: EventEmitter<DemandaModel> = new EventEmitter<DemandaModel>();
+    @Output('onEditarDemanda') onEditarDemanda: EventEmitter<DemandaModel> = new EventEmitter<DemandaModel>();
+
+    @ViewChild('dialogCadastrarDemanda') dialogCadastrarDemanda: DialogCadastrarDemanda;
 
     constructor(
-        private confirmationService: ConfirmationService
+        private confirmationService: ConfirmationService,
+        private messageService: MessageService
     ) {
 
     }
@@ -135,5 +143,45 @@ export class AppMiddleComponent implements OnChanges {
 
     deletarDemanda(item: DemandaModel): void {
         this.onDeletarDemanda.emit(item);
+    }
+
+    copiarNumeroDemandaEDescricao(item: DemandaModel): void {
+        const resultado: string = `${item.numeroDemanda} - ${item.descricao}`;
+        if (navigator.clipboard) {
+
+            navigator.clipboard.writeText(resultado).then(() => {
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Sucesso',
+                    detail: 'Horas consolidadas copiadas.'
+                });
+            });
+
+        } else {
+
+            const textarea = document.createElement('textarea');
+            textarea.value = resultado;
+
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            document.execCommand('copy');
+
+            document.body.removeChild(textarea);
+
+            this.messageService.add({
+                severity: 'success',
+                summary: 'Sucesso',
+                detail: 'Dados da demanda copiado com sucesso.'
+            });
+        }
+    }
+
+    editarDemanda(item: DemandaModel): void {
+        this.dialogCadastrarDemanda.abrirParaEditar(item);
+    }
+
+    cadastrarDemanda(item: DemandaModel): void {
+        this.onEditarDemanda.emit(item);
     }
 }

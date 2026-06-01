@@ -62,7 +62,10 @@ export class DialogCadastrarDemanda implements OnInit {
     abrirParaEditar(demanda: DemandaModel): void {
         this.titulo = 'Editar Demanda';
         this.formDemanda.patchValue(demanda);
-        this.formDemanda.patchValue({ data: demanda.data });
+
+        const [ano, mes, dia] = demanda.data.split('-').map(Number);
+        this.formDemanda.patchValue({ data: new Date(ano, mes - 1, dia) });
+        
         this.modoEditar = true;
         this.demanda = demanda;
         this.display = true;
