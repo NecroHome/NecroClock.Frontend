@@ -39,8 +39,7 @@ export class LoginService {
         return this.http.post<UserModel>(`${environment.loginContext}register`, user);
     }
 
-    refresh(tokeResponse: LoginResponseModel): Observable<LoginResponseModel> {
-        tokeResponse.accessToken = '';
-        return this.http.post<LoginResponseModel>(`${environment.loginContext}refreshToken`, tokeResponse);
+    refresh(tokenResponse: LoginResponseModel): Observable<LoginResponseModel> {
+        return this.http.post<LoginResponseModel>(`${environment.loginContext}refreshToken`, tokenResponse);
     }
 }

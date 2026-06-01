@@ -120,6 +120,7 @@ export class AppMainViewComponent {
 
     onLogOut(): void {
         localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
         this.router.navigate(['/login']);
     }
 }
