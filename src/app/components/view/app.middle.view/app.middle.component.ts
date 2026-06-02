@@ -54,71 +54,59 @@ export class AppMiddleComponent implements OnChanges {
 
     gerarSemanas(): void {
 
-        const dataInicioMes = new Date(this.mes[0]);
-        const dataFimMes = new Date(this.mes[1]);
-
-        dataInicioMes.setHours(0, 0, 0, 0);
-        dataFimMes.setHours(0, 0, 0, 0);
-
-        const semanas: any[] = [];
-
-        let inicioSemana = new Date(dataInicioMes);
-        let numeroSemana = 1;
-
-        while (inicioSemana <= dataFimMes) {
-
-            const fimSemana = new Date(inicioSemana);
-
-            while (
-                fimSemana.getDay() !== 6 && // Sábado
-                fimSemana < dataFimMes
-            ) {
-                fimSemana.setDate(fimSemana.getDate() + 1);
-            }
-
-            const demandasSemana = this.demandas.filter(d => {
-
-                const data = this.parseDateOnly(d.data);
-
-                return data >= inicioSemana &&
-                    data <= fimSemana;
-            });
-
-            semanas.push({
-                numeroSemana,
-                inicio: new Date(inicioSemana),
-                fim: new Date(fimSemana),
-                demandas: demandasSemana
-            });
-
-            numeroSemana++;
-
-            inicioSemana = new Date(fimSemana);
-            inicioSemana.setDate(inicioSemana.getDate() + 1);
+        if (!this.demandas.length) {
+            this.semanas = [];
+            return;
         }
 
-        this.semanas = semanas;
+        const semanasMap = new Map<string, any>();
+
+        this.demandas.forEach(demanda => {
+
+            const data = this.parseDateOnly(demanda.data);
+
+            // Domingo da semana
+            const inicioSemana = new Date(data);
+            inicioSemana.setDate(inicioSemana.getDate() - inicioSemana.getDay());
+            inicioSemana.setHours(0, 0, 0, 0);
+
+            // Sábado da semana
+            const fimSemana = new Date(inicioSemana);
+            fimSemana.setDate(fimSemana.getDate() + 6);
+
+            const chaveSemana = inicioSemana.toISOString().split('T')[0];
+
+            if (!semanasMap.has(chaveSemana)) {
+                semanasMap.set(chaveSemana, {
+                    inicio: new Date(inicioSemana),
+                    fim: new Date(fimSemana),
+                    demandas: []
+                });
+            }
+
+            semanasMap.get(chaveSemana).demandas.push(demanda);
+        });
+
+        this.semanas = Array.from(semanasMap.values())
+            .sort((a, b) => a.inicio.getTime() - b.inicio.getTime())
+            .map((semana, index) => ({
+                numeroSemana: index + 1,
+                ...semana
+            }));
     }
 
     gerarConsolidado(): void {
-
         const mapa = new Map<string, any>();
-
         for (const demanda of this.demandas) {
-
             let item = mapa.get(demanda.numeroDemanda);
-
             if (!item) {
-
                 item = {
                     numeroDemanda: demanda.numeroDemanda,
                     descricao: demanda.descricao,
                     horas: 0
                 };
-
                 mapa.set(demanda.numeroDemanda, item);
             }
-
             item.horas += demanda.horas;
         }
 

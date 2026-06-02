@@ -10,7 +10,9 @@
         </div>
 
         <div class="toolbar-left-middle">
-            
+            <input pInputText class="texto-input" [(ngModel)]="textoBusca" (keyup.enter)="buscar()">
+            <p-button styleClass="btn-acao btn-navegacao" icon="pi pi-search" severity="info"
+                (onClick)="buscar()" title="Buscar demandas"></p-button>
         </div>
 
         <div class="toolbar-middle">

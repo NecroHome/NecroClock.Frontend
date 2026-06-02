@@ -118,6 +118,18 @@ export class AppMainViewComponent {
         });
     }
 
+    filtrarDemandas(texto: string): void {
+        this.demandaService.filtrarDemandas(texto).subscribe({
+            next: (demandas: DemandaModel[]) => {
+                if (demandas.length == 0) {
+                    this.messageService.add({ severity: 'info', summary: 'Vazio', detail: 'A busca não retornou resultados.' });
+                    return;
+                }
+                this.demandas = demandas;
+            }
+        })
+    }
+
     onLogOut(): void {
         localStorage.removeItem('token');
         localStorage.removeItem('refreshToken');

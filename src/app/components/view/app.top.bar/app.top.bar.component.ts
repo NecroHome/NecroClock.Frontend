@@ -30,6 +30,7 @@ export class AppTopBarComponent implements OnInit, OnChanges {
     @Output('onNovaData') onNovaData: EventEmitter<Date[]> = new EventEmitter<Date[]>();
     @Output('onLogout') onLogout: EventEmitter<void> = new EventEmitter<void>();
     @Output('onCadastrarDemanda') onCadastrarDemanda: EventEmitter<DemandaModel> = new EventEmitter<DemandaModel>();
+    @Output('onFiltrarDemandas') onFiltrarDemandas: EventEmitter<string> = new EventEmitter<string>();
 
     @ViewChild('dialogCadastrarDemanda') dialogCadastrarDemanda: DialogCadastrarDemanda;
 
@@ -38,6 +39,8 @@ export class AppTopBarComponent implements OnInit, OnChanges {
     mesAtual: string = '';
     mesAnterior: string = '';
     proximoMes: string = '';
+
+    textoBusca: string = '';
 
     constructor(
         private messageService: MessageService
@@ -169,6 +172,15 @@ export class AppTopBarComponent implements OnInit, OnChanges {
                 detail: 'Horas consolidadas copiadas.'
             });
         }
+    }
+
+    buscar(): void {
+        if (this.textoBusca == '') {
+            this.buscarDados();
+            return;
+        }
+
+        this.onFiltrarDemandas.emit(this.textoBusca);
     }
 
     logout(): void {
