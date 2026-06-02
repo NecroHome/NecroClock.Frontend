@@ -172,4 +172,48 @@ export class AppMiddleComponent implements OnChanges {
     cadastrarDemanda(item: DemandaModel): void {
         this.onEditarDemanda.emit(item);
     }
+
+    copiarSemana(semana: any): void {
+
+        const texto: string = semana.demandas
+            .map((d: any) => {
+                const descricao = d.descricao
+                    .replace(/\r?\n/g, ' ')
+                    .trim();
+
+                return `${d.numeroDemanda} - ${descricao} - ${d.horas}h`;
+            })
+            .join('\n');
+
+        if (navigator.clipboard) {
+
+            navigator.clipboard.writeText(texto).then(() => {
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Sucesso',
+                    detail: 'Semana copiada com sucesso.'
+                });
+            });
+
+            return;
+        }
+
+        const textarea = document.createElement('textarea');
+
+        textarea.value = texto;
+
+        document.body.appendChild(textarea);
+
+        textarea.select();
+
+        document.execCommand('copy');
+
+        document.body.removeChild(textarea);
+
+        this.messageService.add({
+            severity: 'success',
+            summary: 'Sucesso',
+            detail: 'Semana copiada com sucesso.'
+        });
+    }
 }

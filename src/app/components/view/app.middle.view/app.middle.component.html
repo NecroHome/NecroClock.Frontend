@@ -15,10 +15,18 @@
                 <div class="semana-container">
 
                     <div class="semana-header">
-                        Semana {{ semana.numeroSemana }}:
-                        {{ semana.inicio | date:'dd/MM/yyyy' }}
-                        -
-                        {{ semana.fim | date:'dd/MM/yyyy' }}
+
+                        <span>
+                            Semana {{ semana.numeroSemana }}:
+                            {{ semana.inicio | date:'dd/MM/yyyy' }}
+                            -
+                            {{ semana.fim | date:'dd/MM/yyyy' }}
+                        </span>
+
+                        <p-button icon="pi pi-copy" severity="info" styleClass="btn-acao btn-navegacao"
+                            title="Copiar semana completa" (onClick)="copiarSemana(semana)">
+                        </p-button>
+
                     </div>
 
                     @if(semana.demandas.length === 0) {
@@ -54,8 +62,9 @@
                             <p-button styleClass="btn-acao btn-logout" icon="pi pi-minus" severity="danger"
                                 (onClick)="removerHoras(item)" title="Remover 1h a está demanda."></p-button>
 
-                            <p-button styleClass="btn-acao btn-navegacao" severity="info" icon="pi pi-clone" iconPos="left"
-                                title="Copiar número da demanda e descricao" (onClick)="copiarNumeroDemandaEDescricao(item)"></p-button>
+                            <p-button styleClass="btn-acao btn-navegacao" severity="info" icon="pi pi-clone"
+                                iconPos="left" title="Copiar número da demanda e descricao"
+                                (onClick)="copiarNumeroDemandaEDescricao(item)"></p-button>
 
                             <p-button styleClass="btn-acao btn-reset" severity="warn" icon="pi pi-pencil" iconPos="left"
                                 title="Editar dados da demanda" (onClick)="editarDemanda(item)"></p-button>
@@ -112,5 +121,6 @@
 
 </div>
 
-<dialog-cadastrar-demanda #dialogCadastrarDemanda (onCadastrarDemanda)="cadastrarDemanda($event)"></dialog-cadastrar-demanda>
+<dialog-cadastrar-demanda #dialogCadastrarDemanda
+    (onCadastrarDemanda)="cadastrarDemanda($event)"></dialog-cadastrar-demanda>
 <p-toast position="top-right"></p-toast>
