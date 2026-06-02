@@ -5,4 +5,6 @@ export class DemandaModel {
     data: string;
     horas: number;
     userID: number;
+    sql: string;
+    anotacoes: string;
 }

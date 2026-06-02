@@ -82,6 +82,10 @@ http://{IP from here docker is runing}:6005
 
 ## Changelog
 
+### v1.1.0
+* Optional SQL Field: A place to store SQL's that Demanda may need
+* Optional Annotation Field: A place to store annotations abour that demanda
+
 ### v1.0.1
 * Search Feature: Demandas can now be search by numero or descricao.
 * Copy week to clip board

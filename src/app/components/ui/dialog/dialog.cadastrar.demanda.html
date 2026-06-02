@@ -1,9 +1,6 @@
 <p-dialog [(visible)]="display" [modal]="true" [style]="{ width: '500px' }" [closable]="false">
-
     <div class="demanda-dialog">
-
         <div class="dialog-header">
-            <i class="pi pi-briefcase"></i>
             <h2>
                 {{ modoEditar ? 'Editar Demanda' : 'Nova Demanda' }}
             </h2>
@@ -71,6 +68,34 @@
                     <small class="field-help">
                         Valor inicial opcional (padrão 0h)
                     </small>
+                </div>
+            </div>
+
+            <div class="field-card">
+                <i class="pi pi-file-edit"></i>
+
+                <div class="field-info">
+                    <label for="sql">
+                        SQL
+                    </label>
+
+                    <textarea id="sql" pInputTextarea formControlName="sql" rows="4" class="texto-area"
+                        placeholder="INSERT INTO...">
+                    </textarea>
+                </div>
+            </div>
+
+            <div class="field-card">
+                <i class="pi pi-file-edit"></i>
+
+                <div class="field-info">
+                    <label for="anotacoes">
+                        Anotações
+                    </label>
+
+                    <textarea id="anotacoes" pInputTextarea formControlName="anotacoes" rows="4" class="texto-area"
+                        placeholder="Anotações sobre a demanda">
+                    </textarea>
                 </div>
             </div>
 

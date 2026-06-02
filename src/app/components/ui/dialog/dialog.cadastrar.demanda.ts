@@ -40,7 +40,9 @@ export class DialogCadastrarDemanda implements OnInit {
             numeroDemanda: ['', Validators.required],
             descricao: [''],
             horas: [0],
-            userID: [0]
+            userID: [0],
+            sql: [''],
+            anotacoes: ['']
         });
     }
 
@@ -52,7 +54,9 @@ export class DialogCadastrarDemanda implements OnInit {
             numeroDemanda: '',
             descricao: '',
             horas: 0,
-            userID: 0
+            userID: 0,
+            sql: '',
+            anotacoes: ''
         });
 
         this.modoEditar = false;
