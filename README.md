@@ -83,8 +83,7 @@ http://{IP from here docker is runing}:6005
 ## Changelog
 
 ### V1.0.1
-* Search Feature
-    Demandas can now be search by numero or descricao.
+* Search Feature: Demandas can now be search by numero or descricao.
 
 ### v1.0.0
 * Initial release
