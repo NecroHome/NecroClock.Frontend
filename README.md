@@ -84,6 +84,7 @@ http://{IP from here docker is runing}:6005
 
 ### v1.0.1
 * Search Feature: Demandas can now be search by numero or descricao.
+* Copy week to clip board
 
 ### v1.0.0
 * Initial release
