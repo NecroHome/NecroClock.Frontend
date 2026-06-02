@@ -20,7 +20,7 @@ import { DialogCadastrarDemanda } from "../../ui/dialog/dialog.cadastrar.demanda
         ToastModule, DialogCadastrarDemanda
     ],
     providers: [
-        ConfirmationService, MessageService
+        MessageService
     ]
 })
 export class AppMiddleComponent implements OnChanges {
@@ -39,7 +39,6 @@ export class AppMiddleComponent implements OnChanges {
     @ViewChild('dialogCadastrarDemanda') dialogCadastrarDemanda: DialogCadastrarDemanda;
 
     constructor(
-        private confirmationService: ConfirmationService,
         private messageService: MessageService
     ) {
 
@@ -65,12 +64,10 @@ export class AppMiddleComponent implements OnChanges {
 
             const data = this.parseDateOnly(demanda.data);
 
-            // Domingo da semana
             const inicioSemana = new Date(data);
             inicioSemana.setDate(inicioSemana.getDate() - inicioSemana.getDay());
             inicioSemana.setHours(0, 0, 0, 0);
 
-            // Sábado da semana
             const fimSemana = new Date(inicioSemana);
             fimSemana.setDate(fimSemana.getDate() + 6);
 
@@ -129,6 +126,15 @@ export class AppMiddleComponent implements OnChanges {
         this.onRemoverHora.emit(item);
     }
 
+    cadastrarDemanda(item: DemandaModel): void {
+        this.onEditarDemanda.emit(item);
+    }
+
+    editarDemanda(item: DemandaModel): void {
+        this.dialogCadastrarDemanda.abrirParaEditar(item);
+    }
+
+
     deletarDemanda(item: DemandaModel): void {
         this.onDeletarDemanda.emit(item);
     }
@@ -163,14 +169,6 @@ export class AppMiddleComponent implements OnChanges {
                 detail: 'Dados da demanda copiado com sucesso.'
             });
         }
-    }
-
-    editarDemanda(item: DemandaModel): void {
-        this.dialogCadastrarDemanda.abrirParaEditar(item);
-    }
-
-    cadastrarDemanda(item: DemandaModel): void {
-        this.onEditarDemanda.emit(item);
     }
 
     copiarSemana(semana: any): void {

@@ -81,7 +81,9 @@ export class DialogCadastrarDemanda implements OnInit {
         const demanda: DemandaModel = {
             ...this.demanda,
             ...this.formDemanda.value,
-            data: this.formatDateOnly(this.formDemanda.value.data as Date)
+            data: this.formatDateOnly(this.formDemanda.value.data as Date),
+            sql: this.formDemanda.value.sql || '',
+            anotacoes: this.formDemanda.value.anotacoes || ''
         };
 
         this.onCadastrarDemanda.emit(demanda);
