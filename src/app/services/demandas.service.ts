@@ -24,6 +24,10 @@ export class DemandasService {
         return this.http.put<boolean>(`${environment.demandaContext}UpdateDemanda`, demanda);
     }
 
+    filtrarDemandas(busca: string): Observable<DemandaModel[]> {
+        return this.http.get<DemandaModel[]>(`${environment.demandaContext}FiltrarDemandas?busca=${busca}`);
+    }
+
     deleteDemanda(demanda: DemandaModel): Observable<boolean> {
         return this.http.delete<boolean>(`${environment.demandaContext}DeleteDemanda?demandaID=${demanda.id}`);
     }
